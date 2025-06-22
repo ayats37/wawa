@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:58:09 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/22 15:08:10 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/22 16:55:52 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,14 +179,23 @@ char					*build_path(char *path, char *cmd);
 char					**get_paths(t_env **envlist);
 char					*get_path(t_env *envlist);
 
+int	create_pipe_and_fork(int pipe_fd[2], pid_t *pid);
+void	child_process_left(t_tree *node, int pipe_fd[2], t_env **envlist, int last_status);
+void	child_process_right(t_tree *node, int pipe_fd[2], t_env **envlist, int last_status);
+int	handle_fork_error(pid_t pid1, int pipe_fd[2]);
+int	execute_pipe(t_tree *node, t_env **envlist, int last_status);
+
+void	handle_heredoc_redir(t_token *redir);
+void	handle_input_redir(t_token *redir);
+void	handle_output_redir(t_token *redir);
+int	handle_redirection(t_tree *node);
+
 int						is_builtin(char *cmd);
 int						execute_builtin(t_tree *node, t_env **envlist);
 int						execute_tree(t_tree *node, t_env **envlistm,
 							int last_status);
 int						execute_cmd(char **cmds, t_env *envlist, t_tree *node);
-int						handle_redirection(t_tree *node);
-int						execute_pipe(t_tree *node, t_env **envlist,
-							int last_status);
+
 void					handle_heredoc_input(char *delimiter, int write_fd);
 void					write_error(char *command, char *message);
 void					handler(int sig);
@@ -196,5 +205,6 @@ char					*str_join_free(char *s1, const char *s2);
 char					*char_to_str(char c);
 void process_heredocs_tree(t_tree *node);
 void    reset_terminal_mode(void);
+
 
 #endif
