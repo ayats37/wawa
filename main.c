@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:31:55 by taya              #+#    #+#             */
-/*   Updated: 2025/06/22 15:18:08 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/23 11:01:59 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int main(int argc, char **argv, char **env)
         node = parse_op(token_list);
         if(!node)
 			continue;
-        process_heredocs_tree(node); 
+        process_heredocs_tree(node);
         last_exit_status = execute_tree(node, &envlist, last_exit_status);  
         free(input);
     }

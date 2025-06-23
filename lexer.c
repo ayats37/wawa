@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:08:26 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/05/12 20:09:43 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:14:46 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ t_token	*get_next_token(t_lexer *lexer)
 	current = lexer->input + lexer->position;
 	if (current[0] == '\'' || current[0] == '"')
 		return (handle_quote(lexer, *current));
-	if ((lexer->input[lexer->position] == '|' && lexer->input[lexer->position
-			+ 1] == '|') || (lexer->input[lexer->position] == '&'
+	if ((lexer->input[lexer->position] == '|'
+			&& lexer->input[lexer->position + 1] == '|')
+		|| (lexer->input[lexer->position] == '&'
 			&& lexer->input[lexer->position + 1] == '&'))
 		return (handle_operations(lexer, current, 2));
-	if ((lexer->input[lexer->position] == '>' && lexer->input[lexer->position
-			+ 1] == '>') || (lexer->input[lexer->position] == '<'
+	if ((lexer->input[lexer->position] == '>'
+			&& lexer->input[lexer->position + 1] == '>')
+		|| (lexer->input[lexer->position] == '<'
 			&& lexer->input[lexer->position + 1] == '<'))
 		return (handle_operations(lexer, current, 2));
 	if (current[0] == '|' || current[0] == '<' || current[0] == '>'

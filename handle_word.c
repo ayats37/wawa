@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:17:48 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/05/13 20:26:12 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:12:18 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,10 @@ t_token	*handle_word(t_lexer *lexer)
 		else
 			handle_plain_word(&result, lexer);
 	}
-	// ll();
 	if (lexer->position < lexer->lenght && lexer->input[lexer->position] == ' ')
 		has_space = 1;
 	else
 		has_space = 0;
-	// if (in_quotes)
-	// 	return (create_token(result, 4, has_space));
 	token = create_token(result, 0, has_space);
 	free(result);
 	return (token);

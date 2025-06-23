@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:11:54 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/13 11:14:40 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/23 12:11:30 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ void	merge_tokens(t_token **tokens)
 	t_token	*to_delete;
 	char	*merged_value;
 
-	// t_token	*tmp;
 	to_delete = NULL;
-	// tmp = NULL;
 	current = *tokens;
 	while (current != NULL && current->next != NULL)
 	{
@@ -108,9 +106,6 @@ void	merge_tokens(t_token **tokens)
 			current->next = to_delete->next;
 		}
 		else
-		{
-			// tmp = current;
 			current = current->next;
-		}
 	}
 }

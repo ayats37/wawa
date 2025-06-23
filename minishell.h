@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:58:09 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/22 16:55:52 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/23 12:10:31 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,8 @@
 #include <string.h>
 #include <errno.h>
 
-#include "./libft/libft.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <string.h>
-#include <errno.h>
 
-
-#define MAX_PIPES 1024
+extern int g_heredoc_interrupted;
 
 typedef struct s_lexer {
 	int position;

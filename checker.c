@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:14:45 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/05/13 13:17:06 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:11:55 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	two_operator(t_token *token)
 			|| token->next->value[0] == '&'))
 	{
 		printf("bash: syntax error near unexpected token `%s'\n",
-				token->next->value);
+			token->next->value);
 		return (1);
 	}
 	return (0);

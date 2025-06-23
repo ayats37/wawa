@@ -6,13 +6,13 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:58:04 by taya              #+#    #+#             */
-/*   Updated: 2025/06/22 17:04:27 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/23 12:17:58 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		g_heredoc_interrupted = 0;
+int	g_heredoc_interrupted = 0;
 
 void	heredoc_sigint_handler(int sig)
 {
