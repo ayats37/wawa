@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:51:45 by taya              #+#    #+#             */
-/*   Updated: 2025/06/22 01:11:46 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/25 21:41:49 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	process_export(char *arg, t_env **env_list)
 
 int	ft_export(char **cmd, t_env **env_list)
 {
-	char	*equal_sign;
 	int		status;
 	int		i;
 
@@ -84,15 +83,17 @@ int	ft_export(char **cmd, t_env **env_list)
 	i = 1;
 	if (!cmd || !cmd[i])
 		return (1);
-	while (cmd[i])
-	{
-		equal_sign = ft_strchr(cmd[i], '=');
-		if (equal_sign)
+		while (cmd[i])
 		{
-			if (process_export(cmd[i], env_list) != 0)
+			if (!ft_strchr(cmd[i], '='))
+			{
+				printf("minishell: export: `%s': not a valid identifier\n", cmd[i]);
 				status = 1;
+			}
+			else if (process_export(cmd[i], env_list) != 0)
+				status = 1;
+			i++;
 		}
-		i++;
-	}
+		
 	return (status);
 }

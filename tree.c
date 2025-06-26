@@ -6,11 +6,26 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:51:02 by taya              #+#    #+#             */
-/*   Updated: 2025/06/23 12:24:09 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/25 19:01:11 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_string_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
 
 int	execute_tree(t_tree *node, t_env **envlist, int last_status)
 {
@@ -23,7 +38,16 @@ int	execute_tree(t_tree *node, t_env **envlist, int last_status)
 		return (execute_pipe(node, envlist, last_status));
 	else if (node->type == CMD || node->type == DOUBLE_QUOTE)
 	{
-		expand_variables(node->cmd, last_status, *envlist);
+		char **new_cmd = expand_variables(node->cmd, last_status, *envlist);
+		free_string_array(node->cmd);
+		node->cmd = new_cmd;
+
+		printf("Expanded command:\n");
+		for (int i = 0; node->cmd[i]; i++)
+    		printf("cmd[%d] = '%s'\n", i, node->cmd[i]);
+
+		// if (!node->cmd)
+		// 	return (1);
 		if (is_builtin(node->cmd[0]))
 			return (execute_builtin(node, envlist));
 		else
@@ -40,3 +64,4 @@ int	execute_tree(t_tree *node, t_env **envlist, int last_status)
 	}
 	return (1);
 }
+

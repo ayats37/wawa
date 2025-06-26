@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:58:09 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/23 12:10:31 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/25 21:59:25 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ int						parse_export_arg(char *arg, char **name, char **value,
 int						process_export(char *arg, t_env **env_list);
 int						ft_export(char **cmd, t_env **env_list);
 
-void					free_tokens(t_token *tokens);
+// void					free_tokens(t_token *tokens);
+void	free_tokens(char **tokens);
 void					free_tree(t_tree *node);
 void					free_lexer(t_lexer *lexer);
 void					free_resources(char *input, t_lexer *lexer,
@@ -155,10 +156,10 @@ char					*get_variable_value(char *token, int *i,
 char					*expand_dollar_var(char *token, int *i, t_env *env_list,
 							int last_exit_status);
 int						append_char_to_result(char **result, char c);
-char					*expand_token(char *token, t_env *env_list,
-							int last_exit_status);
-void					expand_variables(char **tokens, int last_exit_status,
-							t_env *env_list);
+// char					*expand_token(char *token, t_env *env_list,
+// 							int last_exit_status);
+// void					expand_variables(char **tokens, int last_exit_status,
+// 							t_env *env_list);
 
 char					*find_cmd_path(char *cmd, t_env **envlist);
 char					*check_paths(char **paths, char *cmd);
@@ -193,5 +194,5 @@ char					*char_to_str(char c);
 void process_heredocs_tree(t_tree *node);
 void    reset_terminal_mode(void);
 
-
+char **expand_variables(char **tokens, int last_exit_status, t_env *env_list);
 #endif

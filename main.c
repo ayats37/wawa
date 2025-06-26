@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:31:55 by taya              #+#    #+#             */
-/*   Updated: 2025/06/23 11:01:59 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/25 18:08:36 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	handler(int sig)
 	rl_redisplay();
 }
 
-// void vv()
-// {
-//     system("leaks minishell");
-// }
+void vv()
+{
+    system("leaks minishell");
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -76,7 +76,7 @@ int main(int argc, char **argv, char **env)
     lexer = NULL;
     node = NULL;
     token_list = NULL;
-    // atexit(vv);
+    atexit(vv);
     envlist = init_env(env);
     setup_shell_terminal();
     signal(SIGQUIT, SIG_IGN);
@@ -124,7 +124,7 @@ int main(int argc, char **argv, char **env)
         last_exit_status = execute_tree(node, &envlist, last_exit_status);  
         free(input);
     }
-    free_resources(input, lexer, token_list, node);
+    free_env_list(envlist);
     return (0);
 }
 
