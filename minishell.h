@@ -195,4 +195,9 @@ void process_heredocs_tree(t_tree *node);
 void    reset_terminal_mode(void);
 
 char **expand_variables(char **tokens, int last_exit_status, t_env *env_list);
+
+void free_token_list(t_token *token_list);
+void free_token_list(t_token *token_list);
+
+
 #endif

@@ -39,13 +39,17 @@ t_token	*handle_quote(t_lexer *lexer, char quote)
 t_token	*handle_operations(t_lexer *lexer, char *oper, int i)
 {
 	char	*str;
+	t_token *token;
 
 	str = ft_substr(oper, 0, i);
 	if (!str)
 		return (NULL);
-	str[i] = '\0';
 	lexer->position += i;
 	if (lexer->input[lexer->position] == 32)
-		return (create_token(str, str[0], 1));
-	return (create_token(str, str[0], 0));
+		token = create_token(str, str[0], 1);
+	else
+		token = create_token(str, str[0], 0);
+	free(str); 
+	return (token);
 }
+

@@ -83,7 +83,19 @@ t_tree	*parse_op(t_token *token)
 		left_token = sub_left(tmp, opr);
 		right_token = opr->next;
 		node->left = parse_op(left_token);
+			free_token_list(left_token);
+		if (!node->left)
+		{
+			free(node);
+			return (NULL);
+		}
 		node->right = parse_op(right_token);
+		if (!node->right)
+		{
+			free_tree(node->left);
+			free(node);
+			return (NULL);
+		}
 		return (node);
 	}
 	return (parse_pipes(token));
@@ -107,7 +119,19 @@ t_tree	*parse_pipes(t_token *token)
 		left_token = sub_left(tmp, pipe);
 		right_token = pipe->next;
 		node->left = parse_pipes(left_token);
+		free_token_list(left_token);
+		if (!node->left)
+		{
+			free(node);
+			return (NULL);
+		}
 		node->right = parse_pipes(right_token);
+		if (!node->right)
+		{
+			free_tree(node->left);
+			free(node);
+			return (NULL);
+		}
 		return (node);
 	}
 	return (parse_paren(token));

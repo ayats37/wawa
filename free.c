@@ -69,3 +69,62 @@
 // 	if (node)
 // 		free_tree(node);
 // }
+// Free the lexer structure
+void free_lexer(t_lexer *lexer)
+{
+    if (!lexer)
+        return;
+    free(lexer);
+}
+
+void free_token(t_token *token)
+{
+    if (!token)
+        return;
+    if (token->value)
+        free(token->value);
+    
+    free(token);
+}
+
+
+void free_token_list(t_token *token_list)
+{
+    t_token *current;
+    t_token *next;
+    
+    current = token_list;
+    while (current)
+    {
+        next = current->next;
+        free_token(current);
+        current = next;
+    }
+}
+
+void free_tree(t_tree *node)
+{
+    if (!node)
+        return;
+    
+    free_tree(node->left);
+    free_tree(node->right);
+    
+   
+    if (node->cmd)
+    {
+        int i = 0;
+        while (node->cmd[i])
+        {
+            free(node->cmd[i]);
+            i++;
+        }
+        free(node->cmd);
+    }
+   if (node->redir)
+    {
+        free_token_list(node->redir);
+        node->redir = NULL;
+    }
+    free(node);
+}

@@ -76,7 +76,10 @@ t_tree	*parse_cmd(t_token *token)
 		return (NULL);
 	i = fill_args_and_redirs(token, cmd_args, &redir);
 	if (i == -1)
+	{
+		free(cmd_args);
 		return (NULL);
+	}
 	cmd_args[i] = NULL;
 	return (create_tree_node(token, cmd_args, redir));
 }

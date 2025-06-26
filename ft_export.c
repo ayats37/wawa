@@ -83,17 +83,17 @@ int	ft_export(char **cmd, t_env **env_list)
 	i = 1;
 	if (!cmd || !cmd[i])
 		return (1);
-		while (cmd[i])
+	while (cmd[i])
+	{
+		if (!ft_strchr(cmd[i], '='))
 		{
-			if (!ft_strchr(cmd[i], '='))
-			{
-				printf("minishell: export: `%s': not a valid identifier\n", cmd[i]);
-				status = 1;
-			}
-			else if (process_export(cmd[i], env_list) != 0)
-				status = 1;
-			i++;
+			printf("minishell: export: `%s': not a valid identifier\n", cmd[i]);
+			status = 1;
 		}
+		else if (process_export(cmd[i], env_list) != 0)
+		status = 1;
+		i++;
+	}
 		
 	return (status);
 }
