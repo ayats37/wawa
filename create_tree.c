@@ -19,6 +19,15 @@ t_tree	*create_tree_node(t_token *token, char **cmd, t_token *redir)
 	node = malloc(sizeof(t_tree));
 	if (!node)
 		return (NULL);
+
+    node->cmd = NULL;
+    node->redir = NULL;
+    node->value = NULL;
+    node->left = NULL;
+    node->right = NULL;
+    node->has_space = 0;
+    node->type = 0;
+
 	if (cmd != NULL)
 		node->cmd = cmd;
 	if (redir)
