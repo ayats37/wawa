@@ -34,12 +34,7 @@ void	child_process_left(t_tree *node, int pipe_fd[2], t_env **envlist,
 		int last_status)
 {
 	close(pipe_fd[0]);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-	{
-		close(pipe_fd[1]);
-		perror("dup2 failed");
-		exit(1);
-	}
+	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
 	exit(execute_tree(node->left, envlist, last_status));
 }
@@ -48,12 +43,7 @@ void	child_process_right(t_tree *node, int pipe_fd[2], t_env **envlist,
 		int last_status)
 {
 	close(pipe_fd[1]);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-	{
-		close(pipe_fd[1]);
-		perror("dup2 failed");
-		exit(1);
-	}
+	dup2(pipe_fd[0], STDIN_FILENO);
 	close(pipe_fd[0]);
 	exit(execute_tree(node->right, envlist, last_status));
 }
