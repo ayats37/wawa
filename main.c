@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:31:55 by taya              #+#    #+#             */
-/*   Updated: 2025/06/25 18:08:36 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/26 16:34:46 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,77 +56,10 @@ void	handler(int sig)
 	rl_redisplay();
 }
 
-// void vv()
-// {
-//     system("leaks minishell");
-// }
-
-// int main(int argc, char **argv, char **env)
-// {
-//     char *input;
-//     t_lexer *lexer;
-//     t_token *token;
-//     t_token *token_list;
-//     t_tree *node;
-//     t_env *envlist;
-// 		int last_exit_status = 0;
-// 	(void)argc;
-// 	(void)argv;
-//     input = NULL;
-//     lexer = NULL;
-//     node = NULL;
-//     token_list = NULL;
-//     // atexit(vv);
-//     envlist = init_env(env);
-//     setup_shell_terminal();
-//     signal(SIGQUIT, SIG_IGN);
-//     signal(SIGINT, handler);
-//     rl_catch_signals = 0;
-    
-//     while (1)
-//     {
-//         input = readline("minishell> ");
-//         if (!input)
-//         {
-//             write(1, "exit\n", 5);
-//             break;
-//         }
-//         if (input[0] == '\0')
-//         {
-//             free(input);
-//             continue;
-//         }  
-//         add_history(input);
-//         token_list = NULL;
-//         lexer = initialize_lexer(input);
-// 		while (lexer->position < lexer->lenght)
-// 		{
-// 			token = get_next_token(lexer);
-// 			if (!token)
-// 			    continue;
-// 			token->type = token_type(token);
-// 			append_token(&token_list, token);
-// 		}
-//         if (!token_list)
-//         {
-//             free(input);
-// 			continue ;
-//         }
-// 		if (check_parenthesis(token_list) != 0)
-// 			continue;
-//         merge_tokens(&token_list);
-//         if (check_errors(token_list) == 1)
-// 			continue;
-//         node = parse_op(token_list);
-//         if(!node)
-// 			continue;
-//         process_heredocs_tree(node);
-//         last_exit_status = execute_tree(node, &envlist, last_exit_status);  
-//         free(input);
-//     }
-//     free_env_list(envlist);
-//     return (0);
-// }
+void vv()
+{
+    system("leaks minishell");
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -140,7 +73,7 @@ int main(int argc, char **argv, char **env)
     
     (void)argc;
     (void)argv;
-    
+    atexit(vv);
     envlist = init_env(env);
     setup_shell_terminal();
     signal(SIGQUIT, SIG_IGN);
@@ -169,8 +102,6 @@ int main(int argc, char **argv, char **env)
         
         add_history(input);
         lexer = initialize_lexer(input);
-        
-        // Tokenization phase
         while (lexer->position < lexer->lenght)
         {
             token = get_next_token(lexer);

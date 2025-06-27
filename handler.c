@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:09:13 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/05/13 13:19:43 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:09:31 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ t_token	*handle_quote(t_lexer *lexer, char quote)
 	size_t	lenght;
 	size_t	start;
 	char	*value;
+	t_token *token;
 
 	lexer->position += 1;
+	token = NULL;
 	start = lexer->position;
 	while (lexer->position < lexer->lenght
 		&& lexer->input[lexer->position] != quote)
@@ -32,8 +34,11 @@ t_token	*handle_quote(t_lexer *lexer, char quote)
 	value = ft_substr(lexer->input, start, lenght);
 	lexer->position += 1;
 	if (lexer->input[lexer->position] == 32)
-		return (create_token(value, quote, 1));
-	return (create_token(value, quote, 0));
+		token  = create_token(value, quote, 1);
+	else
+		token  = create_token(value, quote, 0);
+	free(value);
+	return (token);
 }
 
 t_token	*handle_operations(t_lexer *lexer, char *oper, int i)

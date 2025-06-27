@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:17:48 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/23 12:12:18 by taya             ###   ########.fr       */
+/*   Updated: 2025/06/27 11:03:08 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	handle_word_quote(char **result, t_lexer *lexer, int *in_quotes)
 	*result = new_result;
 	lexer->position++;
 	*in_quotes = 0;
+	free(temp);
 }
 
 void	handle_plain_word(char **result, t_lexer *lexer)
