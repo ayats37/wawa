@@ -32,7 +32,6 @@ t_token	*create_token(char *value, char quote, int has_space)
 		token->type = 0;
 	token->has_space = has_space;
 	token->fd = -1;
-	// free(value);
 	return (token);
 }
 
@@ -99,6 +98,9 @@ void	merge_tokens(t_token **tokens)
 					|| current->next->type == 1)))
 		{
 			merged_value = ft_strjoin(current->value, current->next->value);
+			if (!merged_value)
+				return;
+			free(current->value);
 			current->value = merged_value;
 			if (current->type == CMD || current->next->type == CMD)
 				current->type = CMD;

@@ -147,6 +147,7 @@ int main(int argc, char **argv, char **env)
         last_exit_status = execute_tree(node, &envlist, last_exit_status);
         free(input);
         free_token_list(token_list);
+         free_token_list(token);
         free_tree(node);      
     }
     free_env_list(envlist);
