@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	write_error(char *command, char *message)
+int	write_error(char *command, char *message)
 {
 	int	exit_status;
 
@@ -31,7 +31,7 @@ void	write_error(char *command, char *message)
 		exit_status = 126;
 	else
 		exit_status = 1;
-	exit(exit_status);
+	return(exit_status);
 }
 
 int	is_builtin(char *cmd)

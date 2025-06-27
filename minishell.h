@@ -86,7 +86,7 @@ t_token					*create_token(char *value, char quote, int has_space);
 t_type					token_type(t_token *token);
 void					append_token(t_token **head, t_token *token);
 int						check_parenthesis(t_token *token);
-void					merge_tokens(t_token **tokens);
+int					merge_tokens(t_token **tokens);
 int						check_errors(t_token *token);
 t_tree					*parse_op(t_token *token);
 int						calculate_cmd(t_token *token);
@@ -185,7 +185,7 @@ int						execute_tree(t_tree *node, t_env **envlistm,
 int						execute_cmd(char **cmds, t_env *envlist, t_tree *node);
 
 void					handle_heredoc_input(char *delimiter, int write_fd);
-void					write_error(char *command, char *message);
+int				write_error(char *command, char *message);
 void					handler(int sig);
 void					setup_shell_terminal(void);
 void					heredoc_sigint_handler(int sig);

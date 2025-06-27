@@ -126,8 +126,8 @@ int main(int argc, char **argv, char **env)
             continue;
         }
         
-        merge_tokens(&token_list);
-        
+        if (merge_tokens(&token_list))
+            free_token_list(token);
         if (check_errors(token_list) == 1)
         {
             free(input);
@@ -145,9 +145,9 @@ int main(int argc, char **argv, char **env)
         
         process_heredocs_tree(node);
         last_exit_status = execute_tree(node, &envlist, last_exit_status);
+        printf("exit_ status %d\n", last_exit_status);
         free(input);
         free_token_list(token_list);
-         free_token_list(token);
         free_tree(node);      
     }
     free_env_list(envlist);

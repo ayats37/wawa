@@ -55,24 +55,30 @@ int	execute_cmd(char **cmds, t_env *envlist, t_tree *node)
 	char	*full_path;
 	char	**env_array;
 
-	pid = fork();
-	if (pid == -1)
+	full_path = find_cmd_path(cmds[0], &envlist);
+	if (!full_path)
+			write_error(cmds[0], "command not found");
+	else
+	{
+
+		pid = fork();
+		if (pid == -1)
 		write_error(cmds[0], "fork failed");
 	if (pid == 0)
 	{
 		if (node && node->redir)
-			handle_redirection(node);
-		full_path = find_cmd_path(cmds[0], &envlist);
+		handle_redirection(node);
 		if (!full_path)
 			write_error(cmds[0], "command not found");
 		env_array = env_list_to_array(envlist);
 		if (!env_array)
 			return (free(full_path), write_error(cmds[0],
-					"environment conversion failed"), 1);
+		"environment conversion failed"), 1);
 		execve(full_path, cmds, env_array);
 		return (free(full_path), free_env_array(env_array), write_error(cmds[0],
-				"command not found"), 1);
+			"command not found"), 1);
 	}
 	waitpid(pid, &status, 0);
+	}
 	return (WEXITSTATUS(status));
 }

@@ -81,8 +81,9 @@ void	append_token(t_token **head, t_token *token)
 	tmp->next = token;
 }
 
-void	merge_tokens(t_token **tokens)
+int	merge_tokens(t_token **tokens)
 {
+	int var = 0;
 	t_token	*current;
 	t_token	*to_delete;
 	char	*merged_value;
@@ -98,17 +99,19 @@ void	merge_tokens(t_token **tokens)
 					|| current->next->type == 1)))
 		{
 			merged_value = ft_strjoin(current->value, current->next->value);
-			if (!merged_value)
-				return;
-			free(current->value);
-			current->value = merged_value;
-			if (current->type == CMD || current->next->type == CMD)
-				current->type = CMD;
-			current->has_space = current->next->has_space;
-			to_delete = current->next;
-			current->next = to_delete->next;
+			// if (!merged_value)
+			// return;
+		free(current->value);
+		current->value = merged_value;
+		// if (current->type == CMD || current->next->type == CMD)
+		current->type = CMD;
+		current->has_space = current->next->has_space;
+		to_delete = current->next;
+		current->next = to_delete->next;
+		var++;
 		}
 		else
 			current = current->next;
 	}
+	return (var);
 }
