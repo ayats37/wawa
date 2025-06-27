@@ -17,7 +17,10 @@ void	handle_heredoc_redir(t_token *redir)
 	if (redir->fd > 0)
 	{
 		if (dup2(redir->fd, STDIN_FILENO) == -1)
+		{
+			close(redir->fd);
 			write_error(NULL, "dup2 failed");
+		}
 		close(redir->fd);
 	}
 }
@@ -29,8 +32,11 @@ void	handle_input_redir(t_token *redir)
 	fd = open(redir->value, O_RDONLY);
 	if (fd == -1)
 		write_error(redir->value, "No such file or directory");
-	if (dup2(fd, STDIN_FILENO) == -1)
+	if (dup2(redir->fd, STDIN_FILENO) == -1)
+	{
+		close(redir->fd); 
 		write_error(NULL, "dup2 failed");
+	}
 	close(fd);
 }
 
@@ -44,8 +50,11 @@ void	handle_output_redir(t_token *redir)
 		fd = open(redir->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		write_error(redir->value, "Permission denied");
-	if (dup2(fd, STDOUT_FILENO) == -1)
+	if (dup2(redir->fd, STDIN_FILENO) == -1)
+	{
+		close(redir->fd);
 		write_error(NULL, "dup2 failed");
+	}
 	close(fd);
 }
 
